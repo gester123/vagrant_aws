@@ -40,11 +40,19 @@ Vagrant.configure("2") do |config|
         :server_root_password => 'rootpass',
         :server_debian_password => 'debpass',
         :server_repl_password => 'replpass'
+      },
+      :rvm => {
+        :default_ruby => "ruby-2.0.0-p247",
+        :rvm_gem_options => "--rdoc --ri",
       }
     }
 
     chef.run_list = [
-        "recipe[vagrant_aws::default]"
-    ]
+                     "recipe[vagrant_aws::default]",
+                     "nginx",
+                     "php",
+                     # "phpmyadmin",
+                     "rvm::system",
+                    ]
   end
 end
