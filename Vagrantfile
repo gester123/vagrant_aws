@@ -9,11 +9,16 @@ Vagrant.configure("2") do |config|
     aws.access_key_id = ENV['AWS_ACCESS_KEY']
     aws.secret_access_key = ENV['AWS_SECRET_KEY']
     aws.keypair_name = "aws_key_pair"
-    aws.ami = "ami-bf1d8a8f"
     aws.region = "us-west-2"
     aws.instance_type = "t1.micro"
+    aws.tags = {
+      'Name' => 'Ubuntu',
+    }
 
-    override.ssh.username = "yc"
+    # http://cloud-images.ubuntu.com/locator/ec2/
+    aws.ami = "ami-b40c9084"
+
+    override.ssh.username = "ubuntu"
     override.ssh.private_key_path = "~/.ssh/aws_key_pair.pem"
   end
 
